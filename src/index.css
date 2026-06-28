@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+
+body{
+
+margin:0;
+
+background:#020617;
+
+color:white;
+
+font-family:Arial, Helvetica, sans-serif;
+
+}
+
+
+*{
+
+box-sizing:border-box;
+
+}
+
+
+a{
+
+text-decoration:none;
+
+color:white;
+
+}
+
+
+.card-hover{
+
+transition:0.3s ease;
+
+}
+
+
+.card-hover:hover{
+
+transform:translateY(-10px);
+
+}
