@@ -5,12 +5,10 @@ import {useSearchParams} from "react-router-dom";
 function CourseRegistration(){
 
 
-
 const [searchParams]=useSearchParams();
 
 
 const selectedCourse=searchParams.get("course") || "";
-
 
 
 const [success,setSuccess]=useState(false);
@@ -19,13 +17,11 @@ const [success,setSuccess]=useState(false);
 
 const [form,setForm]=useState({
 
-
 name:"",
 email:"",
 phone:"",
 course:selectedCourse,
 education:""
-
 
 });
 
@@ -35,7 +31,6 @@ education:""
 
 function handleChange(e){
 
-
 setForm({
 
 ...form,
@@ -44,18 +39,34 @@ setForm({
 
 });
 
-
 }
 
 
 
 
-
-
-function submit(e){
-
+async function submit(e){
 
 e.preventDefault();
+
+
+try{
+
+
+await fetch("http://localhost:5000/course-register",{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":"application/json"
+
+},
+
+body:JSON.stringify(form)
+
+
+});
+
 
 
 setSuccess(true);
@@ -73,8 +84,18 @@ education:""
 });
 
 
+
 }
 
+catch(error){
+
+console.log(error);
+
+}
+
+
+
+}
 
 
 
@@ -95,6 +116,16 @@ return(
 Course Registration
 
 </h1>
+
+
+
+
+
+<p className="text-center mt-5 text-gray-300 text-xl">
+
+Join DevOps & Cloud Training Program 🚀
+
+</p>
 
 
 
@@ -124,7 +155,6 @@ Registration Completed Successfully 🚀
 
 
 
-
 <form onSubmit={submit}>
 
 
@@ -146,8 +176,6 @@ value={form.name}
 onChange={handleChange}
 
 className="w-full p-3 mt-2 mb-5 bg-slate-800 rounded"
-
-placeholder="Enter name"
 
 />
 
@@ -177,9 +205,8 @@ onChange={handleChange}
 
 className="w-full p-3 mt-2 mb-5 bg-slate-800 rounded"
 
-placeholder="Email"
-
 />
+
 
 
 
@@ -205,8 +232,6 @@ value={form.phone}
 onChange={handleChange}
 
 className="w-full p-3 mt-2 mb-5 bg-slate-800 rounded"
-
-placeholder="Mobile number"
 
 />
 

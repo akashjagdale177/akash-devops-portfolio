@@ -37,13 +37,31 @@ setForm({
 
 
 
-function submit(e){
+async function submit(e){
 
 
 e.preventDefault();
 
 
+
+await fetch("http://localhost:5000/contact",{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":"application/json"
+
+},
+
+body:JSON.stringify(form)
+
+});
+
+
+
 setSent(true);
+
 
 
 setForm({
@@ -56,7 +74,6 @@ message:""
 
 
 }
-
 
 
 

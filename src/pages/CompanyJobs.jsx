@@ -4,8 +4,7 @@ import {Link, useParams} from "react-router-dom";
 function CompanyJobs(){
 
 
-const {id}=useParams();
-
+const {company:id}=useParams();
 
 
 

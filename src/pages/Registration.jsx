@@ -60,10 +60,38 @@ setForm({
 
 
 
-function handleSubmit(e){
-
+async function handleSubmit(e){
 
 e.preventDefault();
+
+
+try{
+
+
+const response = await fetch(
+"http://localhost:5000/apply",
+{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":"application/json"
+
+},
+
+body:JSON.stringify(form)
+
+}
+
+);
+
+
+const data = await response.json();
+
+
+console.log(data);
+
 
 
 setSubmitted(true);
@@ -78,20 +106,30 @@ email:"",
 
 phone:"",
 
-company:"",
+company:selectedCompany,
 
-job:"",
+job:selectedJob,
 
 experience:"",
 
 skills:""
-
 
 });
 
 
 }
 
+catch(error){
+
+
+console.log(error);
+
+
+}
+
+
+
+}
 
 
 
