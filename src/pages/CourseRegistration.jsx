@@ -52,7 +52,7 @@ e.preventDefault();
 try{
 
 
-await fetch("http://localhost:5000/course-register",{
+await fetch("https://akash-devops-portfolio.onrender.com/course-register",{
 
 method:"POST",
 

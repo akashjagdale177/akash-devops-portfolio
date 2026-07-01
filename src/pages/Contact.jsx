@@ -44,7 +44,7 @@ e.preventDefault();
 
 
 
-await fetch("http://localhost:5000/contact",{
+await fetch("https://akash-devops-portfolio.onrender.com/contact",{
 
 method:"POST",
 

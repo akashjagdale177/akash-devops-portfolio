@@ -18,7 +18,7 @@ async function login(e){
 e.preventDefault();
 
 
-const res = await fetch("http://localhost:5000/admin-login",{
+const res = await fetch("https://akash-devops-portfolio.onrender.com/admin-login",{
 
 method:"POST",
 

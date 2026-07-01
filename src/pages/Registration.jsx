@@ -69,7 +69,7 @@ try{
 
 
 const response = await fetch(
-"http://localhost:5000/apply",
+"https://akash-devops-portfolio.onrender.com/apply",
 {
 
 method:"POST",

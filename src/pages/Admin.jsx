@@ -17,7 +17,7 @@ useEffect(()=>{
 
 // Job Applications
 
-fetch("http://localhost:5000/applications")
+fetch("https://akash-devops-portfolio.onrender.com/applications")
 
 .then(res=>res.json())
 
@@ -36,7 +36,7 @@ setJobs(data);
 
 // Course Registrations
 
-fetch("http://localhost:5000/course-registrations")
+fetch("https://akash-devops-portfolio.onrender.com/course-registrations")
 
 .then(res=>res.json())
 
@@ -50,7 +50,7 @@ setCourses(data);
 
 // Contact Messages
 
-fetch("http://localhost:5000/contacts")
+fetch("https://akash-devops-portfolio.onrender.com/contacts")
 
 .then(res=>res.json())
 
