@@ -3,17 +3,10 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
 
-
 const app = express();
 
-
 app.use(cors());
-
 app.use(express.json());
-
-
-
-
 
 mongoose.connect(process.env.MONGO_URL)
 
@@ -28,10 +21,6 @@ console.log("MongoDB Connected");
 console.log(err);
 
 });
-
-
-
-
 
 
 
@@ -63,10 +52,6 @@ skills:String
 
 
 
-
-
-
-
 // Course Registration Model
 
 const CourseRegistration = mongoose.model(
@@ -91,11 +76,6 @@ education:String
 
 
 
-
-
-
-
-
 // Contact Model
 
 const Contact = mongoose.model(
@@ -116,31 +96,26 @@ message:String
 
 
 
-
-
-
-
-
 app.get("/",(req,res)=>{
-
 
 res.send("Backend Running 🚀");
 
-
 });
+
+
+
+// Admin Login
 
 app.post("/admin-login",(req,res)=>{
 
-
 const {username,password}=req.body;
 
-
-
 if(
+
 username===process.env.ADMIN_USERNAME &&
 password===process.env.ADMIN_PASSWORD
-){
 
+){
 
 res.json({
 
@@ -150,11 +125,9 @@ message:"Login Successful"
 
 });
 
-
 }
 
 else{
-
 
 res.status(401).json({
 
@@ -164,14 +137,9 @@ message:"Wrong Username or Password"
 
 });
 
-
 }
 
-
 });
-
-
-
 
 
 
@@ -179,16 +147,11 @@ message:"Wrong Username or Password"
 
 app.post("/apply",async(req,res)=>{
 
-
 try{
 
-
-const data = new Application(req.body);
-
+const data=new Application(req.body);
 
 await data.save();
-
-
 
 res.json({
 
@@ -196,11 +159,9 @@ message:"Application Saved Successfully"
 
 });
 
-
 }
 
 catch(error){
-
 
 res.status(500).json({
 
@@ -208,17 +169,9 @@ error:error.message
 
 });
 
-
 }
 
-
-
 });
-
-
-
-
-
 
 
 
@@ -226,22 +179,41 @@ error:error.message
 
 app.get("/applications",async(req,res)=>{
 
-
-const data = await Application.find();
-
+const data=await Application.find();
 
 res.json(data);
-
 
 });
 
 
 
+// Delete Job Application
 
+app.delete("/applications/:id",async(req,res)=>{
 
+try{
 
+await Application.findByIdAndDelete(req.params.id);
 
+res.json({
 
+message:"Application Deleted Successfully"
+
+});
+
+}
+
+catch(error){
+
+res.status(500).json({
+
+error:error.message
+
+});
+
+}
+
+});
 
 
 
@@ -249,16 +221,11 @@ res.json(data);
 
 app.post("/course-registration",async(req,res)=>{
 
-
 try{
 
-
-const data = new CourseRegistration(req.body);
-
+const data=new CourseRegistration(req.body);
 
 await data.save();
-
-
 
 res.json({
 
@@ -266,12 +233,9 @@ message:"Course Registration Saved Successfully"
 
 });
 
-
 }
 
-
 catch(error){
-
 
 res.status(500).json({
 
@@ -279,18 +243,9 @@ error:error.message
 
 });
 
-
 }
 
-
-
 });
-
-
-
-
-
-
 
 
 
@@ -298,50 +253,31 @@ error:error.message
 
 app.get("/course-registrations",async(req,res)=>{
 
-
-const data = await CourseRegistration.find();
-
+const data=await CourseRegistration.find();
 
 res.json(data);
 
-
 });
 
 
 
+// Delete Course Registration
 
-
-
-
-
-
-// Save Contact Message
-
-app.post("/contact",async(req,res)=>{
-
+app.delete("/course-registrations/:id",async(req,res)=>{
 
 try{
 
-
-const data = new Contact(req.body);
-
-
-await data.save();
-
-
+await CourseRegistration.findByIdAndDelete(req.params.id);
 
 res.json({
 
-message:"Message Saved Successfully"
+message:"Course Registration Deleted Successfully"
 
 });
 
-
 }
 
-
 catch(error){
-
 
 res.status(500).json({
 
@@ -349,18 +285,41 @@ error:error.message
 
 });
 
-
 }
-
-
 
 });
 
 
 
+// Save Contact Message
 
+app.post("/contact",async(req,res)=>{
 
+try{
 
+const data=new Contact(req.body);
+
+await data.save();
+
+res.json({
+
+message:"Message Saved Successfully"
+
+});
+
+}
+
+catch(error){
+
+res.status(500).json({
+
+error:error.message
+
+});
+
+}
+
+});
 
 
 
@@ -368,27 +327,46 @@ error:error.message
 
 app.get("/contacts",async(req,res)=>{
 
-
-const data = await Contact.find();
-
+const data=await Contact.find();
 
 res.json(data);
-
 
 });
 
 
 
+// Delete Contact Message
 
+app.delete("/contacts/:id",async(req,res)=>{
 
+try{
 
+await Contact.findByIdAndDelete(req.params.id);
+
+res.json({
+
+message:"Contact Message Deleted Successfully"
+
+});
+
+}
+
+catch(error){
+
+res.status(500).json({
+
+error:error.message
+
+});
+
+}
+
+});
 
 
 
 app.listen(5000,()=>{
 
-
 console.log("Server running on port 5000");
-
 
 });
