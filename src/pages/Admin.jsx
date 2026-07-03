@@ -35,6 +35,13 @@ setContacts(data);
 },[]);
 async function deleteJob(id){
 
+alert("DELETE CLICKED");
+
+console.log("DELETE CLICKED", id);
+
+...
+async function deleteJob(id){
+
 console.log("DELETE CLICKED", id);
 
 if(!window.confirm("Delete this application?")) return;
