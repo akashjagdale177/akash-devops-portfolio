@@ -33,7 +33,27 @@ setContacts(data);
 .catch(err=>console.log(err));
 
 },[]);
+async function deleteJob(id){
 
+console.log("DELETE CLICKED", id);
+
+if(!window.confirm("Delete this application?")) return;
+
+try{
+
+await fetch(`https://akash-devops-portfolio.onrender.com/applications/${id}`,{
+method:"DELETE"
+});
+
+setJobs(jobs.filter(item=>item._id!==id));
+
+}catch(err){
+
+console.log(err);
+
+}
+
+}
 async function deleteJob(id){
 
 if(!window.confirm("Delete this application?")) return;
