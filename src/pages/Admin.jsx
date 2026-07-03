@@ -33,93 +33,6 @@ setContacts(data);
 .catch(err=>console.log(err));
 
 },[]);
-async function deleteJob(id){
-
-alert("DELETE CLICKED");
-
-console.log("DELETE CLICKED", id);
-
-...
-async function deleteJob(id){
-
-console.log("DELETE CLICKED", id);
-
-if(!window.confirm("Delete this application?")) return;
-
-try{
-
-await fetch(`https://akash-devops-portfolio.onrender.com/applications/${id}`,{
-method:"DELETE"
-});
-
-setJobs(jobs.filter(item=>item._id!==id));
-
-}catch(err){
-
-console.log(err);
-
-}
-
-}
-async function deleteJob(id){
-
-if(!window.confirm("Delete this application?")) return;
-
-try{
-
-await fetch(`https://akash-devops-portfolio.onrender.com/applications/${id}`,{
-method:"DELETE"
-});
-
-setJobs(jobs.filter(item=>item._id!==id));
-
-}catch(err){
-
-console.log(err);
-
-}
-
-}
-
-async function deleteCourse(id){
-
-if(!window.confirm("Delete this registration?")) return;
-
-try{
-
-await fetch(`https://akash-devops-portfolio.onrender.com/course-registrations/${id}`,{
-method:"DELETE"
-});
-
-setCourses(courses.filter(item=>item._id!==id));
-
-}catch(err){
-
-console.log(err);
-
-}
-
-}
-
-async function deleteContact(id){
-
-if(!window.confirm("Delete this message?")) return;
-
-try{
-
-await fetch(`https://akash-devops-portfolio.onrender.com/contacts/${id}`,{
-method:"DELETE"
-});
-
-setContacts(contacts.filter(item=>item._id!==id));
-
-}catch(err){
-
-console.log(err);
-
-}
-
-}
 
 if(!localStorage.getItem("admin")){
 
@@ -188,18 +101,6 @@ className="bg-slate-900 p-6 rounded-xl">
 
 <p>Skills : {item.skills}</p>
 
-<button
-
-onClick={()=>deleteJob(item._id)}
-
-className="mt-5 px-5 py-2 bg-red-600 rounded"
-
->
-
-Delete
-
-</button>
-
 </div>
 
 ))
@@ -240,18 +141,6 @@ className="bg-slate-900 p-6 rounded-xl">
 
 <p>Education : {item.education}</p>
 
-<button
-
-onClick={()=>deleteCourse(item._id)}
-
-className="mt-5 px-5 py-2 bg-red-600 rounded"
-
->
-
-Delete
-
-</button>
-
 </div>
 
 ))
@@ -267,6 +156,7 @@ Contact Messages
 </h2>
 
 <div className="grid md:grid-cols-2 gap-6 mt-6">
+
 {
 
 contacts.map((item)=>(
@@ -292,18 +182,6 @@ className="bg-slate-900 p-6 rounded-xl"
 Message : {item.message}
 
 </p>
-
-<button
-
-onClick={()=>deleteContact(item._id)}
-
-className="mt-5 px-5 py-2 bg-red-600 rounded"
-
->
-
-Delete
-
-</button>
 
 </div>
 
