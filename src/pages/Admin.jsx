@@ -179,7 +179,20 @@ className="bg-slate-900 p-6 rounded-xl"
 <p>Job : {item.job}</p>
 <p>Experience : {item.experience}</p>
 <p>Skills : {item.skills}</p>
+{item.resume && (
 
+<a
+href={item.resume}
+target="_blank"
+rel="noopener noreferrer"
+className="inline-block mt-4 px-5 py-2 bg-green-600 rounded hover:bg-green-700"
+>
+
+View Resume
+
+</a>
+
+)}
 <button
 onClick={()=>deleteJob(item._id)}
 className="mt-5 px-5 py-2 bg-red-600 rounded hover:bg-red-700"

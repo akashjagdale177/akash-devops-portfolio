@@ -16,7 +16,7 @@ const selectedCompany=params.get("company") || "";
 
 const [submitted,setSubmitted]=useState(false);
 
-
+const [resume,setResume]=useState(null);
 
 const [form,setForm]=useState({
 
@@ -64,73 +64,66 @@ async function handleSubmit(e){
 
 e.preventDefault();
 
-
 try{
 
+const formData=new FormData();
 
-const response = await fetch(
+formData.append("name",form.name);
+formData.append("email",form.email);
+formData.append("phone",form.phone);
+formData.append("company",form.company);
+formData.append("job",form.job);
+formData.append("experience",form.experience);
+formData.append("skills",form.skills);
+
+if(resume){
+
+formData.append("resume",resume);
+
+}
+
+const response=await fetch(
+
 "https://akash-devops-portfolio.onrender.com/apply",
 {
 
 method:"POST",
 
-headers:{
-
-"Content-Type":"application/json"
-
-},
-
-body:JSON.stringify(form)
+body:formData
 
 }
 
 );
 
-
-const data = await response.json();
-
+const data=await response.json();
 
 console.log(data);
 
-
-
 setSubmitted(true);
-
-
 
 setForm({
 
 name:"",
-
 email:"",
-
 phone:"",
-
 company:selectedCompany,
-
 job:selectedJob,
-
 experience:"",
-
 skills:""
 
 });
 
+setResume(null);
 
-}
+document.getElementById("resume").value="";
 
-catch(error){
-
+}catch(error){
 
 console.log(error);
 
-
 }
 
-
-
 }
-
 
 
 
@@ -495,22 +488,25 @@ placeholder="AWS, Docker, Kubernetes..."
 
 <label>
 
-Upload Resume
+Upload Resume (PDF / DOC / DOCX)
 
 </label>
 
-
-
 <input
+
+id="resume"
 
 required
 
 type="file"
 
+accept=".pdf,.doc,.docx"
+
+onChange={(e)=>setResume(e.target.files[0])}
+
 className="w-full mt-3 mb-6"
 
 />
-
 
 
 
